@@ -1,13 +1,26 @@
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
 import torch
 import re
 
 
 @st.cache_resource
 def load_model():
-    tokenizer = AutoTokenizer.from_pretrained("/Users/Sumanth/Terminal/LLM/Fine_Tuned_5000")
-    model = AutoModelForCausalLM.from_pretrained("/Users/Sumanth/Terminal/LLM/Fine_Tuned_5000")
+    base_model_path = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+    lora_weights_path = "/Users/Sumanth/Terminal/LLM/Fine_Tuned_5000"
+
+    tokenizer = AutoTokenizer.from_pretrained(lora_weights_path)
+
+    base_model = AutoModelForCausalLM.from_pretrained(
+        base_model_path,
+        torch_dtype=torch.float16,
+        device_map="auto"
+    )
+
+    model = PeftModel.from_pretrained(base_model, lora_weights_path)
+    model.eval()
+    
     return tokenizer, model
 
 tokenizer, model = load_model()
