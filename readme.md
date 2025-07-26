@@ -1,4 +1,4 @@
-Fine-tuned the TinyLlama/TinyLlama-1.1B-Chat-v1.0 model on a custom dataset of motivational quotes categorized by topic. Built an interactive UI that accepts a user-defined topic and generates contextually relevant motivational quotes using the trained model.
+Fine-tuned the TinyLlama-1.1B-Chat model on a custom dataset of motivational quotes labeled by topic. Created an interactive UI that takes a user’s topic and generates motivational quotes from both the base model and the fine-tuned model, allowing side-by-side comparison. The fine-tuned model produces more original and relevant quotes, helping users see the improvement clearly.
 
 
 # Project File Structure 
